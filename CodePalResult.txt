@@ -1,0 +1,117 @@
+<?php
+function fuzzification($x, $a, $b, $c, &$u1, &$u2, &$u3) {
+    $uLeft;  //membership value for half trapezoid (left)
+    $uCenter; //membership value for trapezoid
+    $uRight; //membership value for half trapezoid (right)
+
+    $left_c; $left_d; //c, d value for left trapezoid
+    $ctr_a; $ctr_b; $ctr_c; $ctr_d; //a,b,c, d value for center trapezoid
+    $right_a; $right_b; //a,b value for right trapezoid
+
+    $left_c = $a;
+    $left_d = $b;
+    $ctr_a = $a;
+    $ctr_b = $b;
+    $ctr_c = $c;
+    $ctr_d = $d; 
+    $right_a = $c;
+    $right_b = $d;
+
+    //left trapezoid
+    if ($x <= $left_c) $uLeft = 1;
+    if ($x > $left_c && $x < $left_d) {
+        $uLeft = ($left_d - $x) / ($left_d - $left_c);
+    }
+    if ($x >= $left_d) $uLeft = 0;
+
+    $u1 = $uLeft;
+
+    //center trapezoid
+    if ($x <= $ctr_a || $x >= $ctr_d) $uCenter = 0;
+    if ($x > $ctr_a && $x < $ctr_b) {
+        $uCenter = ($x - $ctr_a)/($ctr_b-$ctr_a);
+    }
+    if ($x >= $ctr_b && $x <= $ctr_c) $uCenter = 1;
+    if ($x > $ctr_c && $x < $ctr_d) {
+        $uCenter = ($ctr_d-$x) / ($ctr_d-$ctr_c);
+    }
+    $u2 = $uCenter;
+
+    //right trapezoid
+    if ($x <= $right_a) $uRight = 0;
+    if ($x > $right_a && $x < $right_b) {
+        $uRight = ($x-$right_a)/($right_b-$right_a);
+    }
+    if ($x >= $right_b) $uRight = 1;
+    $u3 = $uRight;
+}
+
+function and_rules($f1, $f2, &$temp, &$conclusion) {
+    if ($f1 >= $f2) $temp = $f2; else $temp = $f1;
+    if ($temp >= $conclusion) $conclusion = $temp;
+}
+
+function determine_sample($a, $b, $c, $d, &$s1, &$s2, &$s3) {  //from output fuzzy
+    $s1 = ($b+$a)/2;
+    $s2 = ($c+$b)/2;
+    $s3 = ($d+$c)/2;
+}
+
+function defuzzification($u1, $u2, $u3, $s1, $s2, $s3, &$result) {
+    $result = (($u1*$s1)+($u2*$s2)+($u3*$s3))/($u1+$u2+$u3);
+}
+
+$x_explv; $uLow; $uMedium; $uHigh; //exploration level
+$x_exptm; $uFast; $uNormal; $uSlow; //exploration time
+$poor; $average; $awesome; //conclusion
+$sample1; $sample2; $sample3; //for defuzzification
+$reward; //reward outcome
+
+echo "Masukkan x untuk expl level : ";
+$x_explv = floatval(fgets(STDIN));
+echo "Masukkan x untuk expl time : ";
+$x_exptm = floatval(fgets(STDIN));
+fuzzification($x_explv, 40, 60, 80, $uLow, $uMedium, $uHigh); //exploration level
+fuzzification($x_exptm, 15, 30, 45, $uFast, $uNormal, $uSlow); //exploration time
+
+echo "Fuzzification of exploration level : " . PHP_EOL;
+echo "uLow = " . $uLow . PHP_EOL;
+echo "uMedium = " . $uMedium . PHP_EOL;
+echo "uHigh = " . $uHigh . PHP_EOL;
+
+echo "Fuzzification of exploration time : " . PHP_EOL;
+echo "uFast = " . $uFast . PHP_EOL;
+echo "uNormal = " . $uNormal . PHP_EOL;
+echo "uSlow = " . $uSlow . PHP_EOL;
+
+//rules
+$poor = 0;
+$average = 0;
+$awesome = 0;
+and_rules($uLow, $uFast, $poor, $poor);
+and_rules($uLow, $uNormal, $poor, $poor);
+and_rules($uLow, $uSlow, $average, $average);
+and_rules($uMedium, $uFast, $average, $average);
+and_rules($uMedium, $uNormal, $average, $average);
+and_rules($uMedium, $uSlow, $awesome, $awesome);
+and_rules($uHigh, $uFast, $average, $average);
+and_rules($uHigh, $uNormal, $awesome, $awesome);
+and_rules($uHigh, $uSlow, $awesome, $awesome);
+
+echo "\nConclusion : " . PHP_EOL;
+echo "uPoor = " . $poor . PHP_EOL;
+echo "uAverage = " . $average . PHP_EOL;
+echo "uAwesome = " . $awesome . PHP_EOL;
+
+//sample for defuzzification
+determine_sample(0,40,80,100,$sample1,$sample2,$sample3);
+echo "\nSample value for defuzzification : " . PHP_EOL;
+echo "Sample 1 = " . $sample1 . PHP_EOL;
+echo "Sample 2 = " . $sample2 . PHP_EOL;
+echo "Sample 3 = " . $sample3 . PHP_EOL;
+
+//defuzzification
+defuzzification($poor, $average, $awesome, $sample1, $sample2, $sample3, $reward);
+echo "\n\nREWARD :" . PHP_EOL;
+echo $reward . PHP_EOL;
+?>

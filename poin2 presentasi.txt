@@ -1,0 +1,44 @@
+salam,sebelumnya terima kasih untuk yth bpk... sbg dosen... yg telah hadir dalam 
+ujian ta1 saya, perkenalan , akan memprestasikan penelitian saya dgn judul...
+PURWANTO S.Si, M.Kom, Ph.D & HANNY HARYANTO S.Kom, M.T
+
+-komputer saat ini merupakan kebutuhan dasar berbagai kalangan terutama 
+ di era digital saat ini
+-terutama komputer jenis laptop yang sering digunakan dan banyak dicari
+
+-namun pembeli biasanya akan bingung dengan spesifikasi yg sesuai 
+ dengan kebutuhan mereka
+-maka dari permasalahan tersebut dapat dibuat sebuah sistem cerdas yang akan 
+ membantu pembeli dalam membeli sebuah laptop
+
+-untuk sistem cerdas yang akan digunakan di penelitian ini adalah fuzzy untuk
+ arti fuzzy sendiri yaitu samar & mengandung unsur ketidakpastian, jadi fuzzy
+ digunakan untuk mengungkapkan kompleksitas atau ketidakpastian suatu pernyataan
+
+-Karena fuzzy dapat memiliki suatu pernyataan antara benar dan salah
+ fuzzy dapat digunakan dalam pengambilan keputusan seperti sistem rekomendasi
+ dikarenan flexible dan dapat mengakomodasi ketidapastian di suatu situasi.
+
+-Sebelum nya telah dilakukan beberapa penelitian dengan topik yg sama, yaitu
+ tentang pendukung keputusan pemilihan laptop menggunakan metode fuzzy
+ namun memiliki variable yg fokus ke komponen hardware laptop,
+
+-maka dari hal tersebut jika variable dijadikan input maka pembeli akan kebingungan 
+ apabila mereka tidak terlalu paham dengan kapasitas hardware seperti apa yang 
+ mendukung sesuai spesifikasi kebutuhan mereka.
+
+-maka dibutuhkan variabel input yang dapat pembeli pahami,oleh karena itu 
+ variabel input akan berdasarkan dari program perangkat lunak jenis apa
+ yang akan pengguna sering gunakan
+
+-kerangka pikir yaitu bagaimana alur berjalannya penelitian ini
+
+-Rules/aturan fuzzy digunakan dalam sistem logika fuzzy untuk menyimpulkan output 
+ berdasarkan variabel input. memiliki 4 var dngn msing2 3 himp dgn budget/biaya sbg
+ sbg output
+
+-grafik fuzzy/Fungsi keanggotaan yang menunjukkan pemetaaan input 
+ data
+ 
+-sekian presentasi dari penelitian saya apbila ada kesalahan & kekurangan
+ kata mohon maaf slnjtny saya kembalikan kpd bpk ...&... terima kasih
